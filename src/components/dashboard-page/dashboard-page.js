@@ -1,17 +1,19 @@
 import { Outlet } from "react-router";
-import Navbar from "../common/navbar/navbar";
+import Navbar from "./common/navbar";
 
-const navbarHeight = "5rem" ;
+const navbarHeight = "5rem";
 
 const DashboardPage = () => {
+    return (
+        <div>
+            <Navbar navbarHeight={navbarHeight} />
+            <main>
+                <div className="container-sm">
+                    <Outlet />
+                </div>
+            </main>
+        </div>
+    );
+};
 
-    return ( 
-    <div>
-        <Navbar navbarHeight={navbarHeight} />
-        <main>
-            <Outlet />
-        </main>
-    </div> );
-}
- 
 export default DashboardPage;

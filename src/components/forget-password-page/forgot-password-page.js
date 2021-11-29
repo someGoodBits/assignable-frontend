@@ -2,24 +2,15 @@ import CustomInput from "../common/custom-input/custom-input";
 import Header from "../common/header";
 import { useForm } from "react-hook-form";
 import "../signup-page/signup-page.scss";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { CLASSROOM_DASHBOARD_ROUTE, FORGOT_PASSWORD_ROUTE, SIGNUP_ROUTE } from "../../routes";
+import { useState } from "react";
 import { useAuth } from "../../contexts/auth-context";
 import { ToastContainer, toast } from "react-toastify";
 
 const headerHeight = "5rem";
 
-const SiginInPage = () => {
-    const { currentUser, signin } = useAuth();
+const ForgetPasswordPage = () => {
+    const { passwordReset } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (currentUser) {
-            navigate("/" + CLASSROOM_DASHBOARD_ROUTE);
-        }
-    }, [currentUser,navigate]);
 
     const {
         register,
@@ -29,10 +20,10 @@ const SiginInPage = () => {
 
     function onSubmit(data) {
         setIsLoading(true);
-        signin(data.email, data.password).then(
-            () => {
+        passwordReset(data.email).then(
+            ()=>{
                 setIsLoading(false);
-                toast.success("Signin Successfull", {
+                toast.success("Password Rest Link Has been Sent to Your Email", {
                     position: "bottom-center",
                     autoClose: 2000,
                     hideProgressBar: false,
@@ -41,13 +32,10 @@ const SiginInPage = () => {
                     draggable: true,
                     progress: undefined,
                 });
-                setTimeout(() => {
-                    window.location.reload();
-                }, 2000);
             },
-            (error) => {
+            ()=>{
                 setIsLoading(false);
-                toast.error(error.message, {
+                toast.error("Oops something went wrong Try Again", {
                     position: "bottom-center",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -55,12 +43,13 @@ const SiginInPage = () => {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                });
+                })
             }
-        );
+        )
     }
 
-    return (
+
+    return ( 
         <div className="bg-primary" style={{ width: "100%", minHeight: "100vh" }}>
             <div className="top-0 w-100 header-container">
                 <div className="container-sm ">
@@ -69,9 +58,12 @@ const SiginInPage = () => {
             </div>
             <div className="d-md-flex align-items-center justify-content-center p-3" style={{ minHeight: "100vh" }}>
                 <div className="card rounded-5 shadow-lg p-3">
-                    <div className="card-title fw-900 fs-4 text-primary text-center mt-3 mb-4">Welcome</div>
+                    <div className="card-title fw-900 fs-4 text-primary text-center mt-3 mb-4">
+                        Don't worry we got your back!
+                    </div>
                     <div>
                         <form onSubmit={handleSubmit(onSubmit)}>
+
                             <div className="">
                                 <CustomInput
                                     name="email"
@@ -82,47 +74,20 @@ const SiginInPage = () => {
                                     register={register}
                                     required
                                 />
-                                <div className="d-none d-md-block" style={{ minWidth: "18rem" }}></div>
+                                <div className="d-none d-md-block" style={{ minWidth: "24rem" }}></div>
                             </div>
+                            
                             <div className="mt-3">
-                                <CustomInput
-                                    name="password"
-                                    label="Password"
-                                    type="password"
-                                    placeholder="Enter your secret"
-                                    errors={errors}
-                                    register={register}
-                                    required
-                                />
-                                <div className="d-none d-md-block" style={{ minWidth: "20rem" }}></div>
-                            </div>
-
-                            <div className="mt-3">
-                                <Link className="text-decoration-none" to={"/" + FORGOT_PASSWORD_ROUTE}>
-                                    <span className="text-500 fw-bold cursor-pointer">Forgot password?</span>
-                                </Link>
-                            </div>
-
-                            <div className="mt-3">
-                                <div className="d-flex flex-md-row flex-column align-items-center">
-                                    <button
-                                        type="button"
-                                        className="btn btn-hollow d-flex justify-content-center btn-48 rounded rounded-4 mt-2 mt-md-0"
-                                        onClick={()=>{navigate("/" + SIGNUP_ROUTE)}}
-                                        style={{flex:"1 0"}}
-                                    >
-                                        <span>Sign up</span>
-                                    </button>
-
+                                <div className="d-flex flex-md-row flex-column align-items-center justify-content-center">
                                     <button
                                         type="submit"
-                                        className="btn d-flex justify-content-center btn-primary btn-48 ms-3 rounded rounded-4 mt-2 mt-md-0"
-                                        style={{flex:"1 0"}}
+                                        className="btn d-flex justify-content-center btn-primary btn-48 rounded rounded-4 mt-2 mt-md-0"
+                                        style={{ minWidth: "18rem" }}
                                     >
                                         {isLoading ? (
                                             <div className="spinner-border spinner-border-sm text-white"></div>
                                         ) : (
-                                            <span>Sign in</span>
+                                            <span>Send Password Rest Link</span>
                                         )}
                                     </button>
                                 </div>
@@ -134,6 +99,6 @@ const SiginInPage = () => {
             <ToastContainer position="bottom-center" theme="dark" />
         </div>
     );
-};
-
-export default SiginInPage;
+}
+ 
+export default ForgetPasswordPage;

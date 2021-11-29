@@ -19,6 +19,17 @@ html,body {
     height: 2.5rem ;
 }
 
+.btn-hollow {
+    color: var(--bs-neutral-500) !important;
+
+    &:hover {
+        background-color: var(--bs-neutral-200) !important;
+        color: var(--bs-neutral-900) !important;
+    }
+}
+
+
+
 h1,h2,h3,h4,h5,h6 {
     font-weight: 800 !important ;
     margin: 0 !important ;
@@ -44,3 +55,26 @@ h1,h2,h3,h4,h5,h6 {
 .cursor-pointer {
     cursor: pointer ;
 }
+
+.btn-hollow {
+    background-color: transparent ;
+    color: var(--bs-neutral-500);
+}
+
+.btn-hollow:hover {
+    background-color: var(--bs-neutral-200) ;
+    color: var(--bs-neutral-900);
+}
+
+.btn-hollow > svg {
+    stroke: var(--bs-neutral-500 );
+}
+
+.btn-hollow:hover > svg {
+    stroke: var(--bs-neutral-900 );
+}
+
+.fw-900 {
+    font-weight: 900 !important ;
+}
+

@@ -60,5 +60,22 @@ $utilities: (
     ),
 );
 
+:root {
+    --bs-neutral-900: hsl(256, 30%, 40%);
+    --bs-neutral-500: hsl(256, 30%, 60%);
+    --bs-neutral-300: hsl(256, 80%, 92%);
+    --bs-neutral-200: hsl(250, 30%, 94%);
+    --bs-neutral-100: hsl(0, 0%, 100%);
+    --bs-primary-light: hsl(256, 70%, 75%);
+    --bs-danger: #eb4770;
+    --bs-safe: #40bf95;
+    --bs-info: #477ceb;
+    --bs-risk: #ffbb33;
+    --bs-danger-light: #fad1db;
+    --bs-safe-light: #d9f2ea;
+    --bs-info-light: #d9e1f2;
+    --bs-risk-light: #ffecc8;
+}
+
 // import bootstrap
 @import "bootstrap/scss/bootstrap";

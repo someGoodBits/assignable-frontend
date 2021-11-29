@@ -2,11 +2,19 @@ import FeatherIcon from "feather-icons-react";
 import { useState } from "react";
 import ClassroomCard from "./common/classroom-card";
 
-const DashboardClassroom = () => {
-    const [classroomList, setClassroomList] = useState([{
-        classroomName : "DBMS",
-        classroomDescription : "Database Management System"
-    }]);
+// const testClassroom = [{
+//     classroomName : "DBMS",
+//     classroomDescription : "Database Management System"
+// },{
+//     classroomName : "DBMS",
+//     classroomDescription : "Database Management System"
+// },{
+//     classroomName : "DBMS",
+//     classroomDescription : "Database Management System"
+// }];
+
+const ClassroomList = () => {
+    const [classroomList, ] = useState([]);
 
     return (
         <div>
@@ -31,9 +39,10 @@ const DashboardClassroom = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
-                        {classroomList.map((classroom) => (
-                            <div key={classroom.classroomName} className="col">
+                    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3">
+                        {classroomList.map((classroom,i) => (
+                            // todo replace with classroom id
+                            <div key={classroom.classroomName} className="col" >
                                 <ClassroomCard classroomDetails={classroom} />
                             </div>
                         ))}
@@ -44,4 +53,4 @@ const DashboardClassroom = () => {
     );
 };
 
-export default DashboardClassroom;
+export default ClassroomList;

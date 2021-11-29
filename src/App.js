@@ -1,23 +1,46 @@
 import { BrowserRouter,Routes, Route } from "react-router-dom";
-import { DASHBOARD_ROUTE, SIGNIN_ROUTE, SIGNUP_ROUTE } from "./routes"; 
+import { 
+    CLASSROOM_DASHBOARD_ROUTE, 
+    CLASSROOM_ROUTE, 
+    CLASSROOM_SETTINGS_ROUTE, 
+    CLASSROOM_STUDENTS_ROUTE, 
+    FORGOT_PASSWORD_ROUTE, 
+    SIGNIN_ROUTE, 
+    SIGNUP_ROUTE 
+} from "./routes"; 
+
 
 // Page Components
 import SiginInPage from "./components/signin-page/signin-page";
-import SignUpPage from "./components/signup-page/siginup-page";
-import DashboardPage from "./components/dashboard-page/dashboard-page";
-import DashboardClassroom from "./components/dashboard-page/dashboard-classroom";
+import SignUpPage from "./components/signup-page/signup-page";
+import ClassroomDashboard from "./components/dashboard-page/classroom-dashboard";
+import ClassroomList from "./components/dashboard-page/classroom-list"; 
+import Classroom from "./components/dashboard-page/classroom";
+import ClassroomSection from "./components/dashboard-page/classroom-section";
+import ClassroomStudents from "./components/dashboard-page/classroom-student";
+import ClassroomSettings from "./components/dashboard-page/classroom-settings";
+import { AuthProvider } from "./contexts/auth-context.js";
+import ForgetPasswordPage from "./components/forget-password-page/forgot-password-page";
 
 function App() {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path={DASHBOARD_ROUTE} element={<DashboardPage/>}>
-                    <Route index element={<DashboardClassroom/>} />
-                </Route>
-                <Route path={SIGNIN_ROUTE} element={<SiginInPage/>} />
-                <Route path={SIGNUP_ROUTE} element={<SignUpPage/>} />
-            </Routes>
-        </BrowserRouter>
+        <AuthProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path={CLASSROOM_DASHBOARD_ROUTE} element={<ClassroomDashboard/>}>
+                        <Route index element={<ClassroomList/>} />
+                        <Route path={CLASSROOM_ROUTE} element={<Classroom/>}>
+                            <Route index element={<ClassroomSection/>} />
+                            <Route path={CLASSROOM_STUDENTS_ROUTE} element={<ClassroomStudents/>} />
+                            <Route path={CLASSROOM_SETTINGS_ROUTE} element={<ClassroomSettings/>} />
+                        </Route>
+                    </Route>
+                    <Route path={SIGNIN_ROUTE} element={<SiginInPage/>} />
+                    <Route path={SIGNUP_ROUTE} element={<SignUpPage/>} />
+                    <Route path={FORGOT_PASSWORD_ROUTE} element={<ForgetPasswordPage/>} />
+                </Routes>
+            </BrowserRouter>
+        </AuthProvider>
     );
 }
 

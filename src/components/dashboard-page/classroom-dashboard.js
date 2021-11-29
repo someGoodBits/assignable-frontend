@@ -3,7 +3,7 @@ import Navbar from "./common/navbar";
 
 const navbarHeight = "5rem";
 
-const DashboardPage = () => {
+const ClassroomDashboard = () => {
     return (
         <div>
             <Navbar navbarHeight={navbarHeight} />
@@ -16,4 +16,4 @@ const DashboardPage = () => {
     );
 };
 
-export default DashboardPage;
+export default ClassroomDashboard;

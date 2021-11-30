@@ -7,13 +7,13 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CLASSROOM_DASHBOARD_ROUTE, SIGNIN_ROUTE } from "../../routes";
 import { useAuth } from "../../contexts/auth-context";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { auth } from "../../firebase-service";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { STUDENT_ROLE, TEACHER_ROLE } from "../../global";
+import getErrorMessage from "../../utils/error-factory";
 
 const headerHeight = "5rem";
-const isTeacher = "TEACHER";
-const isStudent = "STUDENT";
 
 const SignUpPage = () => {
     const { currentUser, signup } = useAuth();
@@ -30,7 +30,7 @@ const SignUpPage = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const [accountType, setAccountType] = useState(isTeacher);
+    const [accountType, setAccountType] = useState(TEACHER_ROLE);
 
     function onSubmit(data) {
         setIsLoading(true);
@@ -40,11 +40,6 @@ const SignUpPage = () => {
                 toast.success("Signup Successfull", {
                     position: "bottom-center",
                     autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
                 });
                 let loginPromise = signInWithEmailAndPassword(auth, data.email, data.password) ;
                 toast.promise(
@@ -57,11 +52,6 @@ const SignUpPage = () => {
                     {
                         position: "bottom-center",
                         autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
                     }
                 );
 
@@ -71,14 +61,9 @@ const SignUpPage = () => {
             },
             (error) => {
                 setIsLoading(false);
-                toast.error(error.message, {
+                toast.error(getErrorMessage(error.code), {
                     position: "bottom-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
+                    autoClose: 5000
                 });
             }
         );
@@ -100,8 +85,8 @@ const SignUpPage = () => {
                                 <AccountTypeSelector
                                     accountType={accountType}
                                     setAccountType={setAccountType}
-                                    isTeacher={isTeacher}
-                                    isStudent={isStudent}
+                                    teacherRole={STUDENT_ROLE}
+                                    studentRole={TEACHER_ROLE}
                                 />
                             </div>
 
@@ -144,8 +129,8 @@ const SignUpPage = () => {
                                     />
                                     <div className="d-none d-md-block" style={{ minWidth: "18rem" }}></div>
                                 </div>
-                                <div className={accountType === isStudent ? "col-sm" : "col-sm d-none d-sm-block"}>
-                                    {accountType === isStudent && (
+                                <div className={accountType === STUDENT_ROLE ? "col-sm" : "col-sm d-none d-sm-block"}>
+                                    {accountType === STUDENT_ROLE && (
                                         <CustomInput
                                             name="enrollmentNumber"
                                             label="Enrollment Number"
@@ -185,7 +170,6 @@ const SignUpPage = () => {
                     </div>
                 </div>
             </div>
-            <ToastContainer position="bottom-center" theme="dark" />
         </div>
     );
 };

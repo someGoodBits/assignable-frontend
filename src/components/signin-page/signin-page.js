@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CLASSROOM_DASHBOARD_ROUTE, FORGOT_PASSWORD_ROUTE, SIGNUP_ROUTE } from "../../routes";
 import { useAuth } from "../../contexts/auth-context";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import getErrorMessage from "../../utils/error-factory";
 
 const headerHeight = "5rem";
 
@@ -19,7 +20,7 @@ const SiginInPage = () => {
         if (currentUser) {
             navigate("/" + CLASSROOM_DASHBOARD_ROUTE);
         }
-    }, [currentUser,navigate]);
+    }, [currentUser, navigate]);
 
     const {
         register,
@@ -35,11 +36,6 @@ const SiginInPage = () => {
                 toast.success("Signin Successfull", {
                     position: "bottom-center",
                     autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
                 });
                 setTimeout(() => {
                     window.location.reload();
@@ -47,14 +43,9 @@ const SiginInPage = () => {
             },
             (error) => {
                 setIsLoading(false);
-                toast.error(error.message, {
+                toast.error(getErrorMessage(error.code), {
                     position: "bottom-center",
                     autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
                 });
             }
         );
@@ -108,8 +99,10 @@ const SiginInPage = () => {
                                     <button
                                         type="button"
                                         className="btn btn-hollow d-flex justify-content-center btn-48 rounded rounded-4 mt-2 mt-md-0"
-                                        onClick={()=>{navigate("/" + SIGNUP_ROUTE)}}
-                                        style={{flex:"1 0"}}
+                                        onClick={() => {
+                                            navigate("/" + SIGNUP_ROUTE);
+                                        }}
+                                        style={{ flex: "1 0" }}
                                     >
                                         <span>Sign up</span>
                                     </button>
@@ -117,7 +110,7 @@ const SiginInPage = () => {
                                     <button
                                         type="submit"
                                         className="btn d-flex justify-content-center btn-primary btn-48 ms-3 rounded rounded-4 mt-2 mt-md-0"
-                                        style={{flex:"1 0"}}
+                                        style={{ flex: "1 0" }}
                                     >
                                         {isLoading ? (
                                             <div className="spinner-border spinner-border-sm text-white"></div>
@@ -131,7 +124,6 @@ const SiginInPage = () => {
                     </div>
                 </div>
             </div>
-            <ToastContainer position="bottom-center" theme="dark" />
         </div>
     );
 };

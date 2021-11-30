@@ -8,6 +8,7 @@ import { APIBaseURL } from "../api/api-config";
 import { auth } from "../firebase-service";
 import axios from "axios";
 import qs from "qs";
+import getUserProfile from "../api/get-user-profile";
 
 const AuthContext = createContext();
 
@@ -18,6 +19,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState();
     const [loading, setLoading] = useState(true);
+    const [userProfile, setUserProfile] = useState(null);
 
     const signup = (email, password, role, displayName, enrollmentNumber="") => {
         let promise = new Promise(function (resolve, reject) {
@@ -85,9 +87,21 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            console.log(user);
+            setLoading(true);
+            // console.log(user);
             setCurrentUser(user);
-            setLoading(false);
+
+            if(user){
+                getUserProfile(user).then((response)=>{
+                    if(response.data.status === "success") {
+                        setUserProfile(response.data.message);
+                    }
+                    setLoading(false);
+                });
+            } else {
+                setLoading(false);
+            }
+            
         });
 
         return unsubscribe;
@@ -95,6 +109,7 @@ export function AuthProvider({ children }) {
 
     const value = {
         currentUser,
+        userProfile,
         signup,
         signin,
         signout,

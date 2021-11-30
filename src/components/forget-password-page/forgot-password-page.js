@@ -25,24 +25,14 @@ const ForgetPasswordPage = () => {
                 setIsLoading(false);
                 toast.success("Password Rest Link Has been Sent to Your Email", {
                     position: "bottom-center",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
+                    autoClose: 2000
                 });
             },
             ()=>{
                 setIsLoading(false);
                 toast.error("Oops something went wrong Try Again", {
                     position: "bottom-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
+                    autoClose: 5000
                 })
             }
         )

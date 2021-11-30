@@ -3,7 +3,7 @@ import announcementIcon from "../../../assets/images/announcement.png";
 import FeatherIcon from "feather-icons-react";
 import { useState } from "react";
 
-const PostCard = ({ type = "ANNOUNCEMENT", content = "Content" }) => {
+const PostCard = ({ content = "",post }) => {
     const [attachments, ] = useState(["abcd", "abcd"]);
     
     return (
@@ -13,17 +13,17 @@ const PostCard = ({ type = "ANNOUNCEMENT", content = "Content" }) => {
             </div> */}
             <div className="flex-fill">
                 <div className="d-flex align-items-center" style={{ height: "3rem" }}>
-                    <img width="48" height="48" src={type === "ANNOUNCEMENT" ? announcementIcon : assignmentIcon} alt="" />
+                    <img width="48" height="48" src={post.type === "ANNOUNCEMENT" ? announcementIcon : assignmentIcon} alt="" />
                     <div className="flex-fill ms-3">
                         <h5 className="text-900" style={{ textTransform: "capitalize" }}>
-                            {type.toLowerCase()}
+                            {post.type.toLowerCase()}
                         </h5>
                         <div className="fw-normal text-500 lh-1" style={{ fontSize: "12px" }}>
                             11 May 2021
                         </div>
                     </div>
                     <div className="d-flex align-items-center">
-                        {type === "ASSIGNMENT" && (
+                        {post.type === "ASSIGNMENT" && (
                             <span className="me-2 btn-hollow bg-200 px-2 py-1 rounded rounded-3 cursor-pointer">
                             <FeatherIcon width="18" icon="zap"/>
                                 <span className="ms-2" style={{ fontSize: "12px" }}>
@@ -38,16 +38,14 @@ const PostCard = ({ type = "ANNOUNCEMENT", content = "Content" }) => {
                 </div>
 
                 <div className="mt-2 text-500 d-flex">
-                    <div className="d-none d-md-block" style={{flex:"0 0 48px"}}></div>
-                    <div className="md-0 ms-md-3">
+                    <div className="d-none d-lg-block" style={{flex:"0 0 48px"}}></div>
+                    <div className="md-0 ms-lg-3">
                         {content}
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ornare iaculis aliquam. Quisque nec
-                        sapien vitae ipsum facilisis aliquet. Morbi tempus pharetra finibus. Duis at dignissim erat
                     </div>
                 </div>
                 <div className="mt-2 d-flex align-items-center">
-                    <div className="d-none d-md-block" style={{flex:"0 0 48px"}}></div>
-                    <div className="flex-fill d-flex ms-0 ms-md-3">
+                    <div className="d-none d-lg-block" style={{flex:"0 0 48px"}}></div>
+                    <div className="flex-fill d-flex ms-0 ms-lg-3">
                         {attachments.slice(0, 1).map((attachment) => (
                             <div
                                 key={attachment}
@@ -65,7 +63,7 @@ const PostCard = ({ type = "ANNOUNCEMENT", content = "Content" }) => {
                         )}
                     </div>
                     <div>
-                        {type === "ASSIGNMENT" && (
+                        {post.type === "ASSIGNMENT" && (
                             <span className="ms-2 btn-hollow bg-200 px-2 py-1 rounded rounded-3 cursor-pointer">
                                 <FeatherIcon width="18" icon="clock" />
                                 <span className="ms-2" style={{ fontSize: "12px" }}>

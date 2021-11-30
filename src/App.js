@@ -3,7 +3,9 @@ import {
     CLASSROOM_DASHBOARD_ROUTE, 
     CLASSROOM_ROUTE, 
     CLASSROOM_SETTINGS_ROUTE, 
+    CLASSROOM_STUDENTS_REQUEST_LIST_ROUTE, 
     CLASSROOM_STUDENTS_ROUTE, 
+    CREATE_ANNOUNCEMENT_ROUTE, 
     FORGOT_PASSWORD_ROUTE, 
     SIGNIN_ROUTE, 
     SIGNUP_ROUTE 
@@ -21,6 +23,8 @@ import ClassroomStudents from "./components/dashboard-page/classroom-student";
 import ClassroomSettings from "./components/dashboard-page/classroom-settings";
 import { AuthProvider } from "./contexts/auth-context.js";
 import ForgetPasswordPage from "./components/forget-password-page/forgot-password-page";
+import { ToastContainer } from "react-toastify";
+import ClassroomJoinRequests from "./components/dashboard-page/classroom-requests";
 
 function App() {
     return (
@@ -33,6 +37,7 @@ function App() {
                             <Route index element={<ClassroomSection/>} />
                             <Route path={CLASSROOM_STUDENTS_ROUTE} element={<ClassroomStudents/>} />
                             <Route path={CLASSROOM_SETTINGS_ROUTE} element={<ClassroomSettings/>} />
+                            <Route path={CLASSROOM_STUDENTS_REQUEST_LIST_ROUTE} element={<ClassroomJoinRequests/>} />
                         </Route>
                     </Route>
                     <Route path={SIGNIN_ROUTE} element={<SiginInPage/>} />
@@ -40,6 +45,7 @@ function App() {
                     <Route path={FORGOT_PASSWORD_ROUTE} element={<ForgetPasswordPage/>} />
                 </Routes>
             </BrowserRouter>
+            <ToastContainer position="bottom-center" theme="dark" />
         </AuthProvider>
     );
 }

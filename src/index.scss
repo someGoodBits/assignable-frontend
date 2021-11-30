@@ -28,6 +28,25 @@ html,body {
     }
 }
 
+.btn-hollow-danger {
+    color: var(--bs-danger) !important;
+    background-color: var(--bs-danger-light) !important;
+
+    &:hover {
+        background-color: var(--bs-danger) !important;
+        color: var(--bs-white) !important;
+    }
+}
+
+.btn-hollow-safe {
+    color: var(--bs-safe) !important;
+    background-color: var(--bs-safe-light) !important;
+
+    &:hover {
+        background-color: var(--bs-safe) !important;
+        color: var(--bs-white) !important;
+    }
+}
 
 
 h1,h2,h3,h4,h5,h6 {

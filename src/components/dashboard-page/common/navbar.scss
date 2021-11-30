@@ -1,13 +1,12 @@
 
 .dropdown-item {
 
-    color: var(--bs-neutral-500) ;
+    color: var(--bs-neutral-500) !important;
     display: flex ;
-    justify-content: center ;
 
     &:hover {
-        color: var(--bs-neutral-900) ;
-        background-color: var(--bs-neutral-200);
+        color: var(--bs-neutral-900) !important ;
+        background-color: var(--bs-neutral-200) !important;
     }
 
     &:hover > svg {
@@ -15,8 +14,8 @@
     }
 
     &:active {
-        color: #fff ;
-        background-color: var(--bs-primary);
+        color: #fff !important;
+        background-color: var(--bs-primary) !important;
     }
 
     &:active > svg {

@@ -4,8 +4,9 @@ export const CLASSROOM_DASHBOARD_ROUTE = "classrooms" ;
 // classroom routes
 export const CLASSROOM_ROUTE = ":classroomID" ;
 export const CLASSROOM_STUDENTS_ROUTE = "students" ;
-export const CLASSROOM_STUDENTS_REQUEST_LIST_ROUTE = "students/requests" ;
+export const CLASSROOM_STUDENTS_REQUEST_LIST_ROUTE = "requests" ;
 export const CLASSROOM_SETTINGS_ROUTE = "settings" ;
+export const CREATE_ASSIGNMENT_ROUTE = "create-assignment" ;
 
 // auth routes
 export const SIGNIN_ROUTE = "signin" ;

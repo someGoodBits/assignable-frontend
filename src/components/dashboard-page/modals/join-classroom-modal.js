@@ -1,0 +1,102 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import joinClassroom from "../../../api/join-classroom";
+import { useAuth } from "../../../contexts/auth-context";
+import CustomInput from "../../common/custom-input/custom-input";
+
+const JoinClassroomModal = ({setModalVisibility}) => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
+    const [isLoading, setIsLoading] = useState(false);
+    const {currentUser} = useAuth();
+
+    function onSubmit(data){
+        setIsLoading(true);
+        joinClassroom(currentUser,data.classroomID).then((response)=>{
+            setIsLoading(false);
+            if(response.data.status){
+                toast.success("Join request has been sent", {
+                    position: "bottom-center",
+                    autoClose: 3000,
+                });
+                setModalVisibility(false);
+            } else {
+                toast.error(response?.data?.message || "Oops! Something went wrong", {
+                    position: "bottom-center",
+                    autoClose: 5000,
+                });
+            }
+        }).catch((error)=>{
+            setIsLoading(false);
+            console.log(error.response)
+            toast.error(error?.response?.data?.message || "Oops! Something went wrong", {
+                position: "bottom-center",
+                autoClose: 5000,
+            });
+        })
+    }
+
+    return (
+        <div className="position-fixed top-0 start-0 vw-100 vh-100">
+            <div className="position-absolute top-50 start-50 translate-middle" style={{ zIndex: "1" }}>
+                <div className="card p-3 border-0 rounded-4 shadow-lg">
+                    <div className="card-title fw-900 fs-4 text-primary text-center mt-3 mb-4">Join Classroom</div>
+                    <div className="card-body p-0">
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <div>
+                                <CustomInput
+                                    name="classroomID"
+                                    label="Classroom Code"
+                                    type="text"
+                                    placeholder="Enter Classroom Code"
+                                    errors={errors}
+                                    register={register}
+                                    required
+                                />
+                                <div className="d-none d-md-block" style={{ minWidth: "20rem" }}></div>
+                            </div>
+                            <div className="mt-2">
+                                <div className="d-flex">
+                                    <button
+                                        type="button"
+                                        className="btn btn-hollow d-flex justify-content-center btn-48 rounded rounded-4 mt-2 mt-md-0"
+                                        onClick={() => {
+                                            setModalVisibility(false);
+                                        }}
+                                        style={{ flex: "1 0" }}
+                                    >
+                                        <span>Cancel</span>
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        className="btn d-flex justify-content-center btn-primary btn-48 ms-0 ms-md-2 rounded rounded-4 mt-2 mt-md-0"
+                                        style={{ flex: "1 0" }}
+                                    >
+                                        {isLoading ? (
+                                            <div className="spinner-border spinner-border-sm text-white"></div>
+                                        ) : (
+                                            <span>Join</span>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div 
+                className="bg-black position-absolute top-0 start-0 w-100 h-100" 
+                style={{ opacity: "0.25" }}
+                onClick={()=>{setModalVisibility(false)}}
+            >
+            </div>
+        </div>
+    );
+};
+
+export default JoinClassroomModal;

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import getClassroom from "../../api/get-classroom";
 import { useAuth } from "../../contexts/auth-context";
-import { TEACHER_ROLE } from "../../global";
+import { STUDENT_ROLE, TEACHER_ROLE } from "../../global";
 import getErrorMessage from "../../utils/error-factory";
 import ClassroomCard from "./common/classroom-card";
 import CreateClassroomModal from "./modals/create-classroom-modal";
@@ -33,7 +33,7 @@ const ClassroomList = () => {
                 autoClose: 5000,
             });
         })
-    },[])
+    },[currentUser])
 
     function onClassroomCreateButtonClicked() {
         setShowCreateClassroomModal(true);
@@ -44,7 +44,11 @@ const ClassroomList = () => {
     }
 
     function openClassroom(classroom){
-        navigate(classroom.id)
+        if(userProfile.role === TEACHER_ROLE){
+            navigate(classroom.id);
+        } else if(userProfile.role === STUDENT_ROLE) {
+            navigate(classroom.classroomID);
+        }
     }
 
     return (

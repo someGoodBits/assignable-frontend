@@ -1,22 +1,23 @@
 import axios from "axios";
 import { APIBaseURL } from "./api-config";
-import qs from "qs" ;
 
-function createPost(user,classroomID,postType,description){
-
-    let data = qs.stringify({classroomID,postType,description})
+function getMarks(user,classroomID,postID,studentID){
 
     var config = {  
-        method: "post",
-        url: APIBaseURL + "classroom/post",
+        method: "get",
+        url: APIBaseURL + "classroom/post/getPoints",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
             token : "Bearer " + user?.accessToken
         },
-        data : data
+        params : {
+            classroomID,
+            postID,
+            studentID
+        }
     };
 
     return axios(config)
 }
 
-export default createPost ;
+export default getMarks ;

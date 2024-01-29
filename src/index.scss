@@ -48,6 +48,16 @@ html,body {
     }
 }
 
+.btn-hollow-info {
+    color: var(--bs-info) !important;
+    background-color: var(--bs-info-light) !important;
+
+    &:hover {
+        background-color: var(--bs-info) !important;
+        color: var(--bs-white) !important;
+    }
+}
+
 
 h1,h2,h3,h4,h5,h6 {
     font-weight: 800 !important ;
@@ -97,3 +107,6 @@ h1,h2,h3,h4,h5,h6 {
     font-weight: 900 !important ;
 }
 
+.points-input {
+    outline: none ;
+}

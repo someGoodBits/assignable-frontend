@@ -6,7 +6,8 @@ export const CLASSROOM_ROUTE = ":classroomID" ;
 export const CLASSROOM_STUDENTS_ROUTE = "students" ;
 export const CLASSROOM_STUDENTS_REQUEST_LIST_ROUTE = "requests" ;
 export const CLASSROOM_SETTINGS_ROUTE = "settings" ;
-export const CREATE_ASSIGNMENT_ROUTE = "create-assignment" ;
+export const POST_ROUTE = "post" ;
+export const SUBMISSION_ROUTE = "submission" ;
 
 // auth routes
 export const SIGNIN_ROUTE = "signin" ;

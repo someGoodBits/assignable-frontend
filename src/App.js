@@ -5,10 +5,11 @@ import {
     CLASSROOM_SETTINGS_ROUTE, 
     CLASSROOM_STUDENTS_REQUEST_LIST_ROUTE, 
     CLASSROOM_STUDENTS_ROUTE, 
-    CREATE_ANNOUNCEMENT_ROUTE, 
+    POST_ROUTE, 
     FORGOT_PASSWORD_ROUTE, 
     SIGNIN_ROUTE, 
-    SIGNUP_ROUTE 
+    SIGNUP_ROUTE, 
+    SUBMISSION_ROUTE
 } from "./routes"; 
 
 
@@ -25,6 +26,9 @@ import { AuthProvider } from "./contexts/auth-context.js";
 import ForgetPasswordPage from "./components/forget-password-page/forgot-password-page";
 import { ToastContainer } from "react-toastify";
 import ClassroomJoinRequests from "./components/dashboard-page/classroom-requests";
+import EditPostPage from "./components/dashboard-page/post/edit-post-page";
+import PostSubmissionSection from "./components/dashboard-page/post/post-submissions";
+import PostPage from "./components/dashboard-page/post/post-page";
 
 function App() {
     return (
@@ -38,6 +42,10 @@ function App() {
                             <Route path={CLASSROOM_STUDENTS_ROUTE} element={<ClassroomStudents/>} />
                             <Route path={CLASSROOM_SETTINGS_ROUTE} element={<ClassroomSettings/>} />
                             <Route path={CLASSROOM_STUDENTS_REQUEST_LIST_ROUTE} element={<ClassroomJoinRequests/>} />
+                        </Route>
+                        <Route path={CLASSROOM_ROUTE + "/" + POST_ROUTE + "/:postID/*"} element={<PostPage />}>
+                            <Route index element={<EditPostPage/>} />
+                            <Route path={SUBMISSION_ROUTE} element={<PostSubmissionSection/>} />
                         </Route>
                     </Route>
                     <Route path={SIGNIN_ROUTE} element={<SiginInPage/>} />

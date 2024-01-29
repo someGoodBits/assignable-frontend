@@ -2,13 +2,13 @@ import axios from "axios";
 import { APIBaseURL } from "./api-config";
 import qs from "qs" ;
 
-function createPost(user,classroomID,postType,description){
+function removePost(user,classroomID,postID){
 
-    let data = qs.stringify({classroomID,postType,description})
+    let data = qs.stringify({classroomID})
 
     var config = {  
-        method: "post",
-        url: APIBaseURL + "classroom/post",
+        method: "delete",
+        url: APIBaseURL + "classroom/post/" + postID,
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
             token : "Bearer " + user?.accessToken
@@ -19,4 +19,4 @@ function createPost(user,classroomID,postType,description){
     return axios(config)
 }
 
-export default createPost ;
+export default removePost ;

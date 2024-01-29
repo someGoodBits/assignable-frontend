@@ -85,8 +85,8 @@ const SignUpPage = () => {
                                 <AccountTypeSelector
                                     accountType={accountType}
                                     setAccountType={setAccountType}
-                                    teacherRole={STUDENT_ROLE}
-                                    studentRole={TEACHER_ROLE}
+                                    teacherRole={TEACHER_ROLE}
+                                    studentRole={STUDENT_ROLE}
                                 />
                             </div>
 

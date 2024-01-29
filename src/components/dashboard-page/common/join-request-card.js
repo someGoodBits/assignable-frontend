@@ -5,13 +5,14 @@ import { toast } from "react-toastify";
 import acceptJoinRequest from "../../../api/accept-join-request";
 import rejectJoinRequest from "../../../api/reject-join-request";
 import { useAuth } from "../../../contexts/auth-context";
-const JoinRequestCard = ({ data , removeEntry }) => {
+const JoinRequestCard = ({ data, removeEntry }) => {
     const { currentUser } = useAuth();
     const parmas = useParams();
     const [isLoading, setIsLoading] = useState(false);
 
     function acceptRequest() {
         setIsLoading(true);
+        console.log(parmas.classroomID);
         acceptJoinRequest(currentUser, parmas.classroomID, data.id)
             .then((response) => {
                 setIsLoading(false);
@@ -41,7 +42,6 @@ const JoinRequestCard = ({ data , removeEntry }) => {
     function rejectReuest() {
         setIsLoading(true);
         rejectJoinRequest(currentUser, parmas.classroomID, data.id)
-        
             .then((response) => {
                 setIsLoading(false);
                 if (response.data.status) {
@@ -78,7 +78,7 @@ const JoinRequestCard = ({ data , removeEntry }) => {
                     <div className="fs-6 text-500">{data?.enrollmentNumber || ""}</div>
                 </div>
                 {isLoading ? (
-                    <div className="pe-2" >
+                    <div className="pe-2">
                         <div className="spinner-border spinner-border-sm text-500"></div>
                     </div>
                 ) : (

@@ -2,12 +2,12 @@ import axios from "axios";
 import { APIBaseURL } from "./api-config";
 import qs from "qs" ;
 
-function createPost(user,classroomID,postType,description){
+function editPost(user,classroomID,postID,postData){
 
-    let data = qs.stringify({classroomID,postType,description})
+    let data = qs.stringify({classroomID,postID,...postData})
 
     var config = {  
-        method: "post",
+        method: "patch",
         url: APIBaseURL + "classroom/post",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -19,4 +19,4 @@ function createPost(user,classroomID,postType,description){
     return axios(config)
 }
 
-export default createPost ;
+export default editPost ;

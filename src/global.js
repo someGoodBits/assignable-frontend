@@ -1,0 +1,4 @@
+export const STUDENT_ROLE = "STUDENT" ;
+export const TEACHER_ROLE = "TEACHER" ;
+export const POST_TYPE_ANNOUNCEMENT = "ANNOUNCEMENT" ;
+export const POST_TYPE_ASSIGNMENT = "ASSIGNMENT" ;

@@ -1,0 +1,13 @@
+@import 'bootstrap/scss/_functions.scss';
+@import 'bootstrap/scss/_variables.scss';
+@import 'bootstrap/scss/_mixins.scss';
+
+.header-container {
+    position: fixed ;
+}
+
+@include media-breakpoint-down(md) { 
+    .header-container {
+        position: relative ;
+    }
+}

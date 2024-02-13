@@ -1,0 +1,35 @@
+
+.account-type-card {
+    border: 2px solid var(--bs-neutral-300);
+    color: var(--bs-neutral-500);
+    transition: all 100ms ease-out ;
+
+    &[data-state="active"] {
+        border: 2px solid var(--bs-primary);
+        color: var(--bs-primary);
+    }
+
+    &-image-container {
+        position: relative ;
+    }
+
+    &[data-state="active"] &-image-container {
+        box-shadow:0 0 0 2px var(--bs-white) , 0 0 0 5px var(--bs-primary) ;
+    }
+
+    &[data-state="active"] &-image-container::before {
+        position: absolute ;
+        content: "" ;
+        top : 100% ;
+        left: 50% ;
+        width : 1rem ;
+        height: 1rem ;
+        border-radius: 50% ;
+        background-color: var(--bs-primary);
+        transform: translate(-50%,calc(-50% + 3px));
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 20 20'%3E%3Cg fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M16.707 5.293a1 1 0 0 1 0 1.414l-8 8a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 1.414-1.414L8 12.586l7.293-7.293a1 1 0 0 1 1.414 0z' fill='%23FFFFFF'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+        background-repeat: no-repeat ;
+        background-position: center ;
+    }
+}
+

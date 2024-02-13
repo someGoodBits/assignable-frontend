@@ -1,0 +1,81 @@
+/* ### IMPORTANT : Order of imports matter ### */
+$body-bg: hsl(250, 30%, 94%);
+
+// overwrite bootstrap vaiables
+$primary: hsl(256, 80%, 60%);
+$font-family-sans-serif: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+
+$custom-theme-colors: (
+    "primary-light": hsl(256, 70%, 75%),
+    "danger": #eb4770,
+    "safe": #40bf95,
+    "info": #477ceb,
+    "risk": #ffbb33,
+    "danger-light": #fad1db,
+    "safe-light": #d9f2ea,
+    "info-light": #d9e1f2,
+    "risk-light": #ffecc8,
+);
+
+$theme-colors: map-merge($custom-theme-colors, $theme-colors);
+
+$neutral: (
+    900: hsl(256, 30%, 40%),
+    500: hsl(256, 30%, 60%),
+    300: hsl(256, 80%, 92%),
+    200: hsl(250, 30%, 94%),
+    100: hsl(0, 0%, 100%),
+);
+
+// Create custom utility classes
+$utilities: (
+    "text-n": (
+        property: color,
+        class: text,
+        values: $neutral,
+    ),
+    "bg-n": (
+        property: background-color,
+        class: bg,
+        values: $neutral,
+    ),
+    "rounded": (
+        property: border-radius,
+        class: rounded,
+        values: (
+            null: $border-radius,
+            0: 0,
+            1: $border-radius-sm,
+            2: $border-radius,
+            3: $border-radius-lg,
+            4: 0.5rem,
+            5: 1rem,
+            circle: 50%,
+            pill: $border-radius-pill,
+        ),
+    ),
+);
+
+:root {
+    --bs-neutral-900: hsl(256, 30%, 40%);
+    --bs-neutral-500: hsl(256, 30%, 60%);
+    --bs-neutral-300: hsl(256, 80%, 92%);
+    --bs-neutral-200: hsl(250, 30%, 94%);
+    --bs-neutral-100: hsl(0, 0%, 100%);
+    --bs-primary-light: hsl(256, 70%, 75%);
+    --bs-danger: #eb4770;
+    --bs-safe: #40bf95;
+    --bs-info: #477ceb;
+    --bs-risk: #ffbb33;
+    --bs-danger-light: #fad1db;
+    --bs-safe-light: #d9f2ea;
+    --bs-info-light: #d9e1f2;
+    --bs-risk-light: #ffecc8;
+}
+
+// import bootstrap
+@import "bootstrap/scss/bootstrap";

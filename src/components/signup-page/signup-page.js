@@ -61,7 +61,7 @@ const SignUpPage = () => {
             },
             (error) => {
                 setIsLoading(false);
-                toast.error(getErrorMessage(error.code), {
+                toast.error(getErrorMessage(error.message), {
                     position: "bottom-center",
                     autoClose: 5000
                 });

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import createClassroom from "../../../api/create-classroom";
 import { useAuth } from "../../../contexts/auth-context";
 import CustomInput from "../../common/custom-input/custom-input";
+import { toast } from "react-toastify";
 
 const CreateClassroomModal = ({ setModalVisibility }) => {
     const {
@@ -19,6 +20,12 @@ const CreateClassroomModal = ({ setModalVisibility }) => {
         createClassroom(currentUser, data.classroomName, data.classroomDescription)
             .then((response) => {
                 setIsLoading(false);
+                toast.success("Classroom Created Successfully", {
+                    position: "bottom-center",
+                    autoClose: 2000,
+                });
+                setModalVisibility(false);
+                location.reload();
                 console.log(response);
             })
             .catch((error) => {

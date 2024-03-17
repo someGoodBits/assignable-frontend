@@ -4,9 +4,11 @@ import FeatherIcon from "feather-icons-react";
 import updateClassroom from "../../api/update-classroom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/auth-context";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import getClassroomByID from "../../api/get-classroom-by-id";
+import removeClassroom from "../../api/remove-classroom";
+import { CLASSROOM_DASHBOARD_ROUTE } from "../../routes";
 
 const ClassroomSettings = () => {
     const {
@@ -17,7 +19,9 @@ const ClassroomSettings = () => {
     } = useForm();
     const [isLoading, setIsLoading] = useState(false);
     const [isFetching, setIsFetching] = useState(true);
+    const [isDeleting, setIsDeleting] = useState(false);
     const { currentUser } = useAuth();
+    const navigate = useNavigate();
     const params = useParams();
 
     useEffect(() => {
@@ -70,6 +74,23 @@ const ClassroomSettings = () => {
             })
             .catch((error) => {
                 setIsLoading(false);
+                console.log(error.response);
+                toast.error(error?.response?.data?.message || "Oops! Something went wrong", {
+                    position: "bottom-center",
+                    autoClose: 5000,
+                });
+            });
+    }
+ 
+    function handleDelete(){
+        setIsDeleting(true);
+        removeClassroom(currentUser, params.classroomID)
+            .then((response) => {
+                setIsDeleting(false);
+                navigate("/"+CLASSROOM_DASHBOARD_ROUTE);
+            })
+            .catch((error) => {
+                setIsDeleting(false);
                 console.log(error.response);
                 toast.error(error?.response?.data?.message || "Oops! Something went wrong", {
                     position: "bottom-center",
@@ -130,6 +151,21 @@ const ClassroomSettings = () => {
                                     required
                                 />
                                 <div className="d-none d-md-block" style={{ minWidth: "20rem" }}></div>
+                            </div>
+                            <div className="mt-3 d-flex justify-content-center">
+                                <button
+                                    className="btn btn-danger btn-48 rounded rounded-4 ps-2"
+                                    onClick={handleDelete}
+                                    type="button"
+                                    disabled={isDeleting}
+                                >
+                                    <FeatherIcon icon="save" />
+                                    {isDeleting ? (
+                                        <div className="spinner-border spinner-border-sm text-white ms-4"></div>
+                                    ) : (
+                                        <span className="ms-3">Delete this Classroom</span>
+                                    )}
+                                </button>
                             </div>
                         </form>
                     </div>

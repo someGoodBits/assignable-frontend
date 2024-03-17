@@ -1,4 +1,4 @@
-import { BrowserRouter,Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { 
     CLASSROOM_DASHBOARD_ROUTE, 
     CLASSROOM_ROUTE, 
@@ -35,6 +35,7 @@ function App() {
         <AuthProvider>
             <BrowserRouter>
                 <Routes>
+                    <Route index element={<Navigate to={CLASSROOM_DASHBOARD_ROUTE} />} />
                     <Route path={CLASSROOM_DASHBOARD_ROUTE} element={<ClassroomDashboard/>}>
                         <Route index element={<ClassroomList/>} />
                         <Route path={CLASSROOM_ROUTE} element={<Classroom/>}>

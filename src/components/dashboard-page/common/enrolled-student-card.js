@@ -13,7 +13,7 @@ const EnrolledStudentsCard = ({ data, removeEntry }) => {
 
     function onRemove() {
         setIsLoading(true);
-        removeStudent(currentUser, params.classroomID, data.id)
+        removeStudent(currentUser, params.classroomID, data.studentID)
             .then((response) => {
                 setIsLoading(false);
                 if (response.data.status) {

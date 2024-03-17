@@ -39,6 +39,7 @@ const EditPostPage = () => {
                 setIsFetching(false);
                 if (response.data.status) {
                     setPostData(response.data.message);
+                    console.log({ post: response.data.message })
                 } else {
                     toast.error(response?.data?.message || "Oops! Something went wrong", {
                         position: "bottom-center",
@@ -116,10 +117,10 @@ const EditPostPage = () => {
                             position: "bottom-center",
                             autoClose: 5000,
                         });
-                        // fetchUploads();
-                        setTimeout(()=>{
-                            window.location.reload();
-                        },2000)
+                        fetchUploads();
+                        // setTimeout(()=>{
+                        //     window.location.reload();
+                        // },2000)
                     } else {
                         toast.error(response?.data?.message || "Oops! Something went wrong", {
                             position: "bottom-center",
@@ -252,7 +253,7 @@ const EditPostPage = () => {
                     ) : uploads?.length > 0 ? (
                         uploads.map((fileData) => (
                             <div className="mb-2" key={fileData.id}>
-                                <UploadedFileCard data={fileData} removeEntry={removeEntry} />
+                                <UploadedFileCard showDelete={userProfile.role !== STUDENT_ROLE} data={fileData} removeEntry={removeEntry} />
                             </div>
                         ))
                     ) : (
@@ -265,11 +266,15 @@ const EditPostPage = () => {
                 <div>
                     <div className="py-4 d-flex align-items-center justify-content-between">
                         <h4 className="text-900">Submissions</h4>
-                            <label className="btn btn-primary btn-48 rounded rounded-4 ps-2">
-                                <input type="file" hidden onChange={onFileSubmit} />
-                                <FeatherIcon icon="upload" />
-                                <span className="ms-2">Upload</span>
-                            </label>
+                        {
+                            postData.submissionOpen !== "false" && (
+                                <label className="btn btn-primary btn-48 rounded rounded-4 ps-2">
+                                    <input type="file" hidden onChange={onFileSubmit} />
+                                    <FeatherIcon icon="upload" />
+                                    <span className="ms-2">Upload</span>
+                                </label>
+                            )
+                        }
                     </div>
                     <div>
                         {isFetchingSubmissions ? (

@@ -2,9 +2,9 @@ import axios from "axios";
 import { APIBaseURL } from "./api-config";
 import qs from "qs" ;
 
-function allotMarks(user,classroomID,postID,studentID,points){
+function allotMarks(user,classroomID,postID,studentID,points,submissionId){
 
-    let data = qs.stringify({classroomID,postID,studentID,points})
+    let data = qs.stringify({classroomID,postID,studentID,points,submissionId})
 
     var config = {  
         method: "post",

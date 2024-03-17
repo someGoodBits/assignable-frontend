@@ -34,14 +34,12 @@ const PostPage = () => {
                         title="Post"
                         isActive={activeTab === "post"}
                     />
-                    {userProfile?.role === TEACHER_ROLE && (
-                        <SidebarItem
-                            link={"submission"}
-                            icon={<FeatherIcon icon="layers" />}
-                            title="Submissions"
-                            isActive={activeTab === "submission"}
-                        />
-                    )}
+                    <SidebarItem
+                        link={"submission"}
+                        icon={<FeatherIcon icon="layers" />}
+                        title="Submissions"
+                        isActive={activeTab === "submission"}
+                    />
                 </div>
             </div>
             <div className="col-lg-6 col-md-8 col-12">

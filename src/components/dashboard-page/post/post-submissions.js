@@ -9,10 +9,12 @@ import UploadedFileCard from "../common/uploaded-file-card";
 import SubmissionCard from "../common/submission-card";
 
 const PostSubmissionSection = () => {
-    const { currentUser } = useAuth();
+    const { currentUser, userProfile } = useAuth();
     const params = useParams();
     const [allSubmissions, setAllSubmissions] = useState([]);
     const [isFetching, setIsFetching] = useState(true);
+
+    const isStudent = userProfile.role === "STUDENT";
 
     useEffect(() => {
         fetchSubmissions();
@@ -25,7 +27,11 @@ const PostSubmissionSection = () => {
                 setIsFetching(false);
                 console.log(response);
                 if (response.data.status) {
-                    setAllSubmissions(response.data.message);
+                    if(isStudent){
+                        setAllSubmissions(response.data.message.filter(s => s.owner === currentUser.uid));
+                    } else {
+                        setAllSubmissions(response.data.message);
+                    }
                 } else {
                     toast.error(response?.data?.message || "Oops! Something went wrong", {
                         position: "bottom-center",

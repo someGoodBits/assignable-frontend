@@ -5,7 +5,7 @@ import qs from "qs" ;
 function deleteFile(user,classroomID,postID,uploadID,filePath){
 
     let data = qs.stringify({classroomID,postID,uploadID,filePath})
-
+    
     var config = {
         method: "delete",
         url: APIBaseURL + "classroom/upload",
